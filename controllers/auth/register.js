@@ -1,0 +1,27 @@
+const asyncHandler = require("express-async-handler");
+const bcrypt = require("bcryptjs");
+const { account } = require("../../db/prisma");
+
+const handleRegister = asyncHandler(async (req, res) => {
+
+  const {username, password, email} = req.body;
+
+  if (!username || !password || !email) return res.status(400).json({message: "Invalid data"});
+
+  
+  const hashPassword = await bcrypt.hash(password, 10);
+  
+  const resAccount = await account.createAccount(
+    username,
+    hashPassword,
+    email,
+  );
+  
+  console.log(resAccount)
+
+  res.status(200).json({message: "Account registered successfully"})
+});
+
+module.exports = {
+  handleRegister
+};
