@@ -4,7 +4,9 @@ const credentials = require("./middleware/credentials");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const cookieParser = require("cookie-parser");
-const router = require("./routes")
+const router = require("./routes");
+const errorHandler = require("./middleware/errorHandler");
+const CustomErr = require("./utils/customErr");
 const app = express();
 
 
@@ -26,6 +28,16 @@ app.use(cookieParser());
 
 //routes
 app.use("/register", router.registerRoute);
+
+//default route
+//handles error json data if the the url cannot find
+app.all(/(.*)/, (req, res, next) => {
+  //set the CustomErr class
+  const err = new CustomErr(`Can't find ${req.originalUrl} on the server`, 404)
+  next(err);
+});
+
+app.use(errorHandler)
 
 
 
