@@ -1,5 +1,8 @@
 require("dotenv").config();
+const CustomErr = require("../utils/customErr");
+const handlePrismaError = require("../db/prismaErrorHandling");
 
+//development err
 const devErr = (res, err) => {
   res.status(err.statusCode).json({
     status: err.statusCode,
@@ -9,6 +12,7 @@ const devErr = (res, err) => {
   });
 }
 
+//production err
 const prodErr = (res, err) => {
   if (err.isOperation === true) {
     res.status(err.statusCode).json({
@@ -19,19 +23,40 @@ const prodErr = (res, err) => {
   } else {
     res.status(500).json({
       status: 500,
-      message: "Sorry, Something went wrong, Please try again later",
+      message: err.message,
       error: err
     });
   }
 }
 
+// prisma request err
+const prismaRequestErr = (err) => {
+
+ return handlePrismaError(err)
+}
+
+//prisma validation err
+const prismaValidationErr = (err) => {
+  const errMsg = "Invalid data";
+
+  return new CustomErr(errMsg, 400)
+}
+
+
 const errorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500; //server err status code
   err.status = err.status || "err"; // client err status code
 
+  
   if (process.env.NODE_ENV === "development"){
+    if (err.name === "PrismaClientValidationError") err = prismaValidationErr(err);
+    if (err.name === "PrismaClientKnownRequestError") err = prismaRequestErr(err);
+    
     devErr(res, err)
   } else if (process.env.NODE_ENV === "production") {
+    if (err.name === "PrismaClientValidationError") err = prismaValidationErr(err);
+    if (err.name === "PrismaClientKnownRequestError") err = prismaRequestErr(err);
+
     prodErr(res, err)
   }
 };
