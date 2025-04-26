@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
-const { account } = require("../../db/prisma");
+const { account, user } = require("../../db/prisma");
 const CustomErr = require("../../utils/customErr");
 
 const handleRegister = asyncHandler(async (req, res) => {
@@ -16,12 +16,14 @@ const handleRegister = asyncHandler(async (req, res) => {
     hashPassword,
     email,
   );
-  
-  console.log(resAccount)
 
+  console.log(resAccount)
+  
+  const getUser = await user.getUser(resAccount.accountId)
+  
   res.status(200).json({
     message: "Account registered successfully",
-    user: resAccount
+    user: getUser
   })
 });
 
