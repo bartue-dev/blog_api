@@ -7,8 +7,19 @@ const cookieParser = require("cookie-parser");
 const router = require("./routes");
 const errorHandler = require("./middleware/errorHandler");
 const CustomErr = require("./utils/customErr");
-const app = express();
 
+
+//handles syncchronous error. Ex. undifined variable or function
+//it should shut down the app because the server already crashed
+//it should invoke before the app express() to make sure it work
+process.on("uncaughtException", (err) => {
+  console.log(err.name, err.message);
+  console.log("Uncaught Exeoption occured!, shutting down");
+  
+  process.exit(1) 
+});
+
+const app = express();
 
 // Handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
@@ -39,7 +50,31 @@ app.all(/(.*)/, (req, res, next) => {
 
 app.use(errorHandler)
 
-
-
+//server
 const PORT = process.env.PORT || 3500
-app.listen(PORT, () => console.log(`Server listening to PORT ${PORT}`));
+const server = app.listen(PORT, () => console.log(`Server listening to PORT ${PORT}`));
+
+//handle rejection promise, if no catch block to a promise
+//it should shut down the app because the server already crashed
+process.on("unhandledRejection", (err) => {
+  console.log(err.name, err.message);
+  console.log("Unhandled rejection occured!, shutting down");
+
+  server.close(() => {
+    process.exit(1) 
+  });
+
+  /* 
+process.exit( code )
+Code: It can be either 0 or 1. 
+0 means end the process without any kind of failure and 
+1 means end the process with some failure.
+*/
+})
+
+
+
+
+
+
+
