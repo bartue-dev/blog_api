@@ -8,7 +8,6 @@ const handleRegister = asyncHandler(async (req, res) => {
   const {username, password, email} = req.body;
 
   if (!username || !password || !email) throw new CustomErr("Invalid Inputs", 400)
-
   
   const hashPassword = await bcrypt.hash(password, 10);
   
@@ -20,7 +19,10 @@ const handleRegister = asyncHandler(async (req, res) => {
   
   console.log(resAccount)
 
-  res.status(200).json({message: "Account registered successfully"})
+  res.status(200).json({
+    message: "Account registered successfully",
+    user: resAccount
+  })
 });
 
 module.exports = {
