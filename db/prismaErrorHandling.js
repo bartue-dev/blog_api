@@ -1,31 +1,31 @@
 const CustomErr  = require("../utils/customErr");
 
 const handlePrismaError = (err) => {
-  let customErr;
+  // let customErr;
   switch (err.code){
+    case "P2001": 
+      // record not found
+       return new CustomErr(`${err.meta.target} not found`, 400);
+       // break;
     case "P2002": 
-      //handling duplicate err
-      customErr =  new CustomErr(`Duplicate field value: ${err.meta.target}`, 400);
-      break;
-    case "P2014":
-      //handling invalid id err
-      customErr = new CustomErr(`Invalid id: ${err.meta.target}`, 400);
-      break;
-    // case "P2003":
-    //   //handling invalid data err
-    //   customErr =  new CustomErr(`Invalid input data: ${err.meta.target}`, 400);
-    //   break;
+      // handling duplicate err
+       return new CustomErr(`Duplicate field value: ${err.meta.target}`, 400);
+       // break;
     case "P2005":
-      //handling invalid data err
-      customErr =  new CustomErr(`Invalid input value: ${err.meta.target}`, 400);
-      break;
+      // handling invalid data err
+       return new CustomErr(`Invalid input value: ${err.meta.target}`, 400);
+       // break;
+    case "P2025":
+      // Operation failed due to records were not found
+       return new CustomErr(`Invalid input value: ${err.meta.target}`, 400);
+       // break;
     default: 
-      //handling other err
-      customErr = new CustomErr(`Something went wrong: ${err.message}`, 500);
-      break;
+      // handling other err
+      return new CustomErr(`Something went wrong: ${err.message}`, 500);
+      // break;
   }
 
-  throw customErr;
+  // throw customErr;
 }
 
 
