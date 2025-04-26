@@ -1,4 +1,4 @@
-const { PrismaClient, Prisma } = require("@prisma/client");
+const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
@@ -11,7 +11,9 @@ class Account {
           password: password,
           email: email,
           user: {
-            create: {} //creates a userId in the user model
+            create: {
+              name: username
+            } //creates a userId in the user model
           }
         },
         include: {
@@ -21,9 +23,20 @@ class Account {
   }
 }
 
+class User {
+  async getUser(userId) {
+    return await prisma.user.findUnique({
+      where: {
+        accountId: userId
+      }
+    });
+  }
+}
+
 const account = new Account();
+const user = new User();
 
 module.exports = {
   account,
-  Prisma
+  user
 }
