@@ -25,8 +25,13 @@ model Account {
 }
 
 model User {
-  account Account @relation(fields: [userId], references: [accountId])
-  userId  String  @unique
+  userId  String  @id @default(uuid())
+  name    String?
+  //relation
+  account Account @relation(fields: [accountId], references: [accountId], onDelete: Cascade)
+
+  //foreign key
+  accountId String @unique
 
   //scalar list
   post    Post[]
