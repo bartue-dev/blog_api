@@ -41,30 +41,37 @@ model User {
 model Post {
   postId    String   @id @default(uuid())
   title     String
+  content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   //relation
-  user User @relation(fields: [userId], references: [userId])
+  author User @relation(fields: [authorId], references: [userId])
 
   //foreign key
-  userId String
+  authorId String
 
   //scalar list
   comment Comment[]
 }
 
 model Comment {
-  id        String   @id @default(uuid())
+  commentId String   @id @default(uuid())
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  //self relation
+  parentComment   Comment @relation("nestedComment", fields: [parentCommentId], references: [commentId])
+  parentCommentId String
+
+  childComment Comment[] @relation("nestedComment")
+
   //relation
-  post Post @relation(fields: [postId], references: [postId])
-  user User @relation(fields: [userId], references: [userId])
+  post   Post @relation(fields: [postId], references: [postId])
+  author User @relation(fields: [authorId], references: [userId])
 
   //foriegn key
-  postId String
-  userId String
+  postId   String
+  authorId String
 }
