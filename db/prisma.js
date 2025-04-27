@@ -12,8 +12,9 @@ class Account {
           email: email,
           user: {
             create: {
+              //creates a accountId in the user model automatically
               name: username
-            } //creates a userId in the user model
+            } 
           }
         },
         include: {
@@ -33,10 +34,10 @@ class User {
   }
 }
 
-const account = new Account();
-const user = new User();
+const accountMethods = new Account();
+const userMethods = new User();
 
 module.exports = {
-  account,
-  user
+  accountMethods,
+  userMethods
 }
