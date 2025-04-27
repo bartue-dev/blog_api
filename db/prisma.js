@@ -34,10 +34,32 @@ class User {
   }
 }
 
+class Post {
+  async createPost(title, content, authorId) {
+    return await prisma.post.create({
+      data: {
+        title,
+        content,
+        authorId
+      }
+    });
+  }
+
+  async getAllPost(authorId) {
+    return await prisma.post.findMany({
+      where: {
+        authorId: authorId
+      }
+    });
+  }
+}
+
 const accountMethods = new Account();
 const userMethods = new User();
+const postMethods = new Post();
 
 module.exports = {
   accountMethods,
-  userMethods
+  userMethods,
+  postMethods
 }
