@@ -39,6 +39,7 @@ app.use(cookieParser());
 
 //routes
 app.use("/register", router.registerRoute);
+app.use("/api/v1/post", router.postRoute);
 
 //default route
 //handles error json data if the the url cannot find
