@@ -16,19 +16,20 @@ datasource db {
 
 model Account {
   accountId String @id @default(uuid())
-  username  String
+  username  String @unique
   password  String
   email     String @unique
 
   //scalar list
-  user User?
+  refreshToken RefreshToken?
+  user         User?
 }
 
 model User {
-  userId  String  @id @default(uuid())
-  name    String?
+  userId   String  @id @default(uuid())
+  username String? @unique
   //relation
-  account Account @relation(fields: [accountId], references: [accountId], onDelete: Cascade)
+  account  Account @relation(fields: [accountId], references: [accountId], onDelete: Cascade)
 
   //foreign key
   accountId String @unique
@@ -36,6 +37,14 @@ model User {
   //scalar list
   post    Post[]
   comment Comment[]
+}
+
+model RefreshToken {
+  tokenId      String  @id @default(uuid())
+  refreshToken String?
+
+  account   Account @relation(fields: [accountId], references: [accountId])
+  accountId String  @unique
 }
 
 model Post {
