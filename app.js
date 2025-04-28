@@ -37,18 +37,22 @@ app.use(express.json());
 // middleware for cookies
 app.use(cookieParser());
 
-//routes
+//auth routes
 app.use("/register", router.registerRoute);
+app.use("/sign-in", router.signinRoute);
+
+//api routes
 app.use("/api/v1/post", router.postRoute);
 
 //default route
-//handles error json data if the the url cannot find
+//handles error if the the url cannot find
 app.all(/(.*)/, (req, res, next) => {
   //set the CustomErr class
   const err = new CustomErr(`Can't find ${req.originalUrl} on the server`, 404)
   next(err);
 });
 
+//errorHandler middleware
 app.use(errorHandler)
 
 //server
