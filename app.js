@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const router = require("./routes");
 const errorHandler = require("./middleware/errorHandler");
 const CustomErr = require("./utils/customErr");
-const verifyJwt = require("./middleware/verifitJwt");
+const verifyJwt = require("./middleware/verifyJwt");
 
 
 //handles syncchronous error. Ex. undifined variable or function
