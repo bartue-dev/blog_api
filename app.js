@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const router = require("./routes");
 const errorHandler = require("./middleware/errorHandler");
 const CustomErr = require("./utils/customErr");
+const verifyJwt = require("./middleware/verifitJwt");
 
 
 //handles syncchronous error. Ex. undifined variable or function
@@ -40,8 +41,12 @@ app.use(cookieParser());
 //auth routes
 app.use("/register", router.registerRoute);
 app.use("/sign-in", router.signinRoute);
+app.use("/refreshToken", router.refreshTokenRoute);
+app.use("/log-out", router.logoutRoute);
 
 //api routes
+//verifiy every api routes for each user
+app.use(verifyJwt); 
 app.use("/api/v1/post", router.postRoute);
 
 //default route
