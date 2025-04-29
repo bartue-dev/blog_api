@@ -6,7 +6,7 @@ const { refreshTokenMethods } = require("../../db/prisma");
 
 //handle logout 
 const handleLogout = asyncHandler(async (req, res, next) => {
- // note: on client, also the delete the accessToken
+ // note: on client, also delete the accessToken
 
   //get cookies where the refreshToken lives
   //cookies only accessible when cookie-parser is invoke
@@ -19,10 +19,10 @@ const handleLogout = asyncHandler(async (req, res, next) => {
   }
 
   const refreshToken = cookies.jwt;
-  const currentUserByToken = await refreshTokenMethods.currentUserByToken(refreshToken);
+  const currentAccountByToken = await refreshTokenMethods.currentAccountByToken(refreshToken);
 
   //is refresh token in db?
-  if (!currentUserByToken) {
+  if (!currentAccountByToken) {
   //delete refreshToken in cookies
     res.clearCookie(
       "jwt",
@@ -32,10 +32,7 @@ const handleLogout = asyncHandler(async (req, res, next) => {
         secure: true
       }
     )
-
-    const err = new CustomErr(`No Content`, 204)
-    next(err);
-    return
+    return res.sendStatus(204);
   }
 
   //delete refreshToken in db
