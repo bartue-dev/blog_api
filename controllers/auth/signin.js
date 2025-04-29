@@ -31,14 +31,14 @@ const handleSignin = asyncHandler(async (req, res) => {
 
     //access token
     const accessToken = jwt.sign(
-      {"id": currentAccountByUsername.tokenId},
+      {"id": currentAccountByUsername.accountId},
       process.env.ACCESS_TOKEN_SECRET,
       {expiresIn: "30m"}
     );
 
     //refresh token
     const refreshToken = jwt.sign(
-      {"id": currentAccountByUsername.tokenId},
+      {"id": currentAccountByUsername.accountId},
       process.env.REFRESH_TOKEN_SECRET,
       {expiresIn: "1d"}
     );
@@ -59,14 +59,11 @@ const handleSignin = asyncHandler(async (req, res) => {
     ) ;
     
     res.json({
-      //access token is already available in cookies no need to input it to response. This is for practice purposes only
       accessToken: accessToken, 
-      sucess: true,
+      success: true,
       message: "Log in sucessful"
     })
   }
 });
 
-module.exports = {
-  handleSignin
-};
+module.exports = handleSignin;
