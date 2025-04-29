@@ -128,7 +128,7 @@ class refreshToken {
   }
 
   //current user by refresh token
-  async currentUserByToken(refreshToken) {
+  async currentAccountByToken(refreshToken) {
     return await prisma.refreshToken.findFirst({
       where: {
         refreshToken: refreshToken
@@ -136,6 +136,7 @@ class refreshToken {
     });
   }
 
+  //delete refresh token
   async deleteRefreshToken(refreshToken) {
     return await prisma.refreshToken.delete({
       where: {
