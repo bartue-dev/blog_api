@@ -126,6 +126,23 @@ class refreshToken {
       }
     });
   }
+
+  //current user by refresh token
+  async currentUserByToken(refreshToken) {
+    return await prisma.refreshToken.findFirst({
+      where: {
+        refreshToken: refreshToken
+      }
+    });
+  }
+
+  async deleteRefreshToken(refreshToken) {
+    return await prisma.refreshToken.delete({
+      where: {
+        refreshToken: refreshToken
+      }
+    });
+  }
 }
 
 const accountMethods = new Account();
