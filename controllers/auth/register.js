@@ -30,6 +30,4 @@ const handleRegister = asyncHandler(async (req, res) => {
   })
 });
 
-module.exports = {
-  handleRegister,
-};
+module.exports = handleRegister;
