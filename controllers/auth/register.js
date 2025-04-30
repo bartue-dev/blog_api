@@ -11,22 +11,28 @@ const handleRegister = asyncHandler(async (req, res) => {
   
   const hashPassword = await bcrypt.hash(password, 10);
   
-  const resAccount = await accountMethods.createAccount(
+  const createdAccount = await accountMethods.createAccount(
     username,
     hashPassword,
     email,
   );
 
-  console.log(resAccount)
-  
-  const getUser = await userMethods.getUser(resAccount.accountId)
+  if (!createdAccount) {
+    const err = new CustomErr(`Cannot create an account`, 400);
+    next(err);
+    return;
+  }
 
+  const getUser = await userMethods.getUser(createdAccount.accountId)
+
+  //opt 2
   //destructure the getUser object and exclude the userId from the object
-  const { userId, ...user} = getUser  
+  //then pass the user obj to the response
+  // const { userId, ...user} = getUser  
 
   res.status(200).json({
     message: "Account registered successfully",
-    user: user //return the new object user
+    user: getUser //return the new object user
   })
 });
 
