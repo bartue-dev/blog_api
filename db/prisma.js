@@ -39,6 +39,11 @@ class User {
     return await prisma.user.findUnique({
       where: {
         accountId: userId
+      },
+      //used omit clause to exclude the userId from the result
+      //also select clause is opposite to omit
+      omit: {
+        userId: true
       }
     });
   }
@@ -51,9 +56,9 @@ class Post {
   async createPost(title, content, authorId) {
     return await prisma.post.create({
       data: {
-        title,
-        content,
-        authorId
+        title: title,
+        content: content,
+        authorId: authorId
       }
     });
   }
@@ -91,8 +96,8 @@ class Post {
         authorId: authorId
       },
       data: {
-        title,
-        content
+        title: title,
+        content: content
       }
     });
   }
