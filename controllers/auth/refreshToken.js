@@ -23,7 +23,7 @@ const handleRefreshToken = asyncHandler(async (req, res, next) => {
 
   //checks if current account by refresh token exist in db
   //if not return an Unauthorized 401 response
-  if (currentAccountByToken) {
+  if (!currentAccountByToken) {
     const err = new CustomErr(`Unauthorized. User not found`, 401)
     next(err);
     return;
@@ -37,7 +37,7 @@ const handleRefreshToken = asyncHandler(async (req, res, next) => {
   //then create a new access token
   jwt.verify(
     refreshToken,
-    process.env.REFRESH_TOKEN_ACCESS,
+    process.env.REFRESH_TOKEN_SECRET,
     (err, decoded) => {
       if (err || currentAccountByToken.accountId !== decoded.id) {
         const err = new CustomErr(`Forbidden`, 403);
@@ -47,7 +47,10 @@ const handleRefreshToken = asyncHandler(async (req, res, next) => {
 
       //new access token
       const accessToken = jwt.sign(
-        {"id": decoded.id},
+        {
+          "id": decoded.id,
+          "username": decoded.username
+        },
         process.env.ACCESS_TOKEN_SECRET,
         {expiresIn: "30m"}
       );
