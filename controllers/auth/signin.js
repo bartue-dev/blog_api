@@ -17,7 +17,11 @@ const handleSignin = asyncHandler(async (req, res) => {
 
   const currentAccountByUsername = await accountMethods.currentAccountByUsername(username);
 
-  console.log("Current account by name:", currentAccountByUsername);
+  if (!currentAccountByUsername) {
+    const err = new CustomErr(`User not found ${username}`, 404)
+    next(err);
+    return;
+  }
 
   const passwordMatch = await bcrypt.compare(password, currentAccountByUsername.password);
 
@@ -31,20 +35,32 @@ const handleSignin = asyncHandler(async (req, res) => {
 
     //access token
     const accessToken = jwt.sign(
-      {"id": currentAccountByUsername.accountId},
+      {
+        "id": currentAccountByUsername.accountId,
+        "username": currentAccountByUsername.username
+      },
       process.env.ACCESS_TOKEN_SECRET,
       {expiresIn: "30m"}
     );
 
     //refresh token
     const refreshToken = jwt.sign(
-      {"id": currentAccountByUsername.accountId},
+      {
+        "id": currentAccountByUsername.accountId,
+        "username": currentAccountByUsername.username
+      },
       process.env.REFRESH_TOKEN_SECRET,
       {expiresIn: "1d"}
     );
 
     //save refreshToken to database
-    await refreshTokenMethods.saveToken(currentAccountByUsername.accountId,refreshToken);
+    const saveTokenToDB = await refreshTokenMethods.saveToken(currentAccountByUsername.accountId,refreshToken);
+
+    if (!saveTokenToDB) {
+      const err = new CustomErr(`Error on saving token on db`, 400)
+      next(err);
+      return
+    }
 
     //save refreshToken to cookie httpOnly
     res.cookie(
