@@ -43,7 +43,7 @@ model RefreshToken {
   tokenId      String  @id @default(uuid())
   refreshToken String?
 
-  account   Account @relation(fields: [accountId], references: [accountId])
+  account   Account @relation(fields: [accountId], references: [accountId], onDelete: Cascade)
   accountId String  @unique
 }
 
@@ -55,7 +55,7 @@ model Post {
   updatedAt DateTime @updatedAt
 
   //relation
-  author User @relation(fields: [authorId], references: [userId])
+  author User @relation(fields: [authorId], references: [accountId], onDelete: Cascade)
 
   //foreign key
   authorId String
