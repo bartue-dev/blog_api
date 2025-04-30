@@ -30,7 +30,7 @@ const verifyJwt = (req, res, next) => {
         return
       }
 
-      req.user = decoded.id
+      req.user = decoded
       next();
     }
   )
