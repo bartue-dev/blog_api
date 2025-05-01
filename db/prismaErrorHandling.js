@@ -5,23 +5,19 @@ const handlePrismaError = (err) => {
   switch (err.code){
     case "P2001": 
       // record not found
-       return new CustomErr(`${err.meta.target} not found`, 400);
+       return new CustomErr(`P2001: ${err.meta.cause}`, 400);
        // break;
     case "P2002": 
       // handling duplicate err
-       return new CustomErr(`Duplicate field value: ${err.meta.target}`, 400);
-       // break;
-    case "P2005":
-      // handling invalid data err
-       return new CustomErr(`Invalid input value: ${err.meta.target}`, 400);
+       return new CustomErr(`P2002: ${err.meta.target} already exist`, 400);
        // break;
     case "P2025":
       // Operation failed due to records were not found
-       return new CustomErr(`Invalid input value: ${err.meta.target}`, 400);
+       return new CustomErr(`P2025: ${err.meta.cause}`, 400);
        // break;
     default: 
       // handling other err
-      return new CustomErr(`Something went wrong: ${err.message}`, 500);
+      return new CustomErr(`Something went wrong default prisma error: ${err.message}`, 500);
       // break;
   }
 
