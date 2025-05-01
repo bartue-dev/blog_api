@@ -36,11 +36,14 @@ const prismaRequestErr = (err) => {
 }
 
 //prisma validation err
-const prismaValidationErr = (err) => {
-  const errMsg = "Invalid data";
+// const prismaValidationErr = (err) => {
+//   const errMsg = "Invalid data";
 
-  return new CustomErr(errMsg, 400)
-}
+//   console.log("prismaValidationErr:", err);
+  
+
+//   return new CustomErr(errMsg, 400)
+// }
 
 
 const errorHandler = (err, req, res, next) => {
@@ -49,7 +52,7 @@ const errorHandler = (err, req, res, next) => {
 
   
   if (process.env.NODE_ENV === "development"){
-    if (err.name === "PrismaClientValidationError") err = prismaValidationErr(err);
+    // if (err.name === "PrismaClientValidationError") err = prismaValidationErr(err);
     if (err.name === "PrismaClientKnownRequestError") err = prismaRequestErr(err);
     
     devErr(res, err)
