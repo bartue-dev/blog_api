@@ -4,21 +4,26 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const CustomErr = require("../../utils/customErr");
 const { accountMethods, refreshTokenMethods } = require("../../db/prisma");
+const { validationResult } = require("express-validator"); 
+const validator = require("../../validator/authValidator");
 
 
-const handleSignin = asyncHandler(async (req, res) => {
+const handleSignin =[ validator.validateSignin ,asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
-  
-  if (!req.body) {
-    const err = new CustomErr(`Invalid credentials: ${req.body}`);
-    next(err);
-    return
+  const errors = validationResult(req);
+
+  //validation
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      fail: true,
+      errors: errors.array()
+    });
   }
 
   const currentAccountByUsername = await accountMethods.currentAccountByUsername(username);
 
   if (!currentAccountByUsername) {
-    const err = new CustomErr(`User not found ${username}`, 404)
+    const err = new CustomErr(`User not found ${username}, register an account first`, 404)
     next(err);
     return;
   }
@@ -26,10 +31,9 @@ const handleSignin = asyncHandler(async (req, res) => {
   const passwordMatch = await bcrypt.compare(password, currentAccountByUsername.password);
 
   if (!passwordMatch) {
-    res.status(401).json({
-      success: false,
-      message: "Unauthorized, Password not match"
-    });
+    const err = new CustomErr(`Incorrect password`, 400);
+    next(err);
+    return
   } else {
     //creat JWTs
 
@@ -80,6 +84,6 @@ const handleSignin = asyncHandler(async (req, res) => {
       message: "Log in sucessful"
     })
   }
-});
+})];
 
 module.exports = handleSignin;
