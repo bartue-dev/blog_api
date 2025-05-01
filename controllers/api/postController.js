@@ -7,10 +7,13 @@ const createPost = asyncHandler(async (req, res, next) => {
   const { title, content } = req.body;
   const { id } = req.user;
 
-  if (!title || !content) {
-    const err = new CustomErr(`Invalid data: ${title} or ${content}`, 400);
-    next(err);
-    return
+  //mock validation
+  for (field in req.body) {
+    if (!req.body[field]) {
+      const err = new CustomErr(`Invalid data: ${field}`, 400);
+      next(err);
+      return
+    }
   }
 
   const post = await postMethods.createPost(title, content, id)
@@ -34,7 +37,7 @@ const getAllPost = asyncHandler(async (req, res, next) => {
   const { id } = req.user;
   
   if (!id) {
-    const err = new CustomErr(`Invalid ${userId}`, 400);
+    const err = new CustomErr(`Invalid userId: ${id}`, 400);
     next(err)
     return
   }
@@ -60,18 +63,22 @@ const getPost = asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const { id } = req.user;
 
-  console.log("this is get post!")
-
-  if (!id || !postId) {
-    const err = new CustomErr(`Invalid params: userId:${id} or postId:${postId}`);
+  if (!id) {
+    const err = new CustomErr(`Invalid userId:${id}`, 400);
     next(err)
     return;
   } 
 
+  if (!postId) {
+    const err = new CustomErr(`Invalid postId:${postId}`, 400);
+    next(err)
+    return;
+  }
+
   const post = await postMethods.getPost(id, postId);
 
   if (!post) {
-    const err = new CustomErr(`${post} not found`, 404);
+    const err = new CustomErr(`Post not found`, 404);
     next(err);
     return;
   }
@@ -89,17 +96,24 @@ const updatePost = asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const {title, content} = req.body;
   const { id } = req.user;
-
-  console.log("UpdatePost req.body:", content);
   
+  //mock validation
+  for (field in req.body) {
+    if (!req.body[field]) {
+      const err = new CustomErr(`Invalid data: ${field}`, 400);
+      next(err);
+      return
+    }
+  }
 
-  if (!req.params || !req.body) {
-    const err = new CustomErr(`invalid params:${req.params} or body:${req.body}`)
+  if (!postId) {
+    const err = new CustomErr(`Invalid postId: ${postId}`,400);
     next(err)
     return
   }
 
   const updatedPost = await postMethods.updatePost(postId, id, title, content);
+  console.log("updatedPost",updatePost)
 
   if (!updatedPost) {
     const err = new CustomErr(`${updatedPost} cannot update post`, 400);
@@ -120,16 +134,22 @@ const deletePost = asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const { id } = req.user;
 
-  if (!postId || !id) {
-    const err = new CustomErr(`Incorrect data: ${postId} or ${id}`, 400);
-    next(err);
+  if (!id) {
+    const err = new CustomErr(`Invalid userId:${id}`, 400);
+    next(err)
     return;
-  }
+  } 
+
+  if (!postId) {
+    const err = new CustomErr(`Invalid postId:${postId}`, 400);
+    next(err)
+    return;
+  } 
 
   const deletedPost = await postMethods.deletePost(postId, id);
 
   if (!deletedPost) {
-    const err = new CustomErr(`${deletePost} cannot delete post`);
+    const err = new CustomErr(`${deletePost} cannot delete post`, 400);
     next(err);
     return;
   }
