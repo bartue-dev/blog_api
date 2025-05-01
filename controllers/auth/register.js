@@ -2,12 +2,20 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const { accountMethods, userMethods } = require("../../db/prisma");
 const CustomErr = require("../../utils/customErr");
+const { validationResult } = require("express-validator")
+const validator = require("../../validator/authValidator") 
 
-const handleRegister = asyncHandler(async (req, res) => {
-
+const handleRegister =[ validator.validateRegister, asyncHandler(async (req, res) => {
   const {username, password, email} = req.body;
+  const errors = validationResult(req);
 
-  if (!username || !password || !email) throw new CustomErr("Invalid Inputs", 400)
+  //validation
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      fail: true,
+      errors: errors.array()
+    });
+  }
   
   const hashPassword = await bcrypt.hash(password, 10);
   
@@ -34,6 +42,6 @@ const handleRegister = asyncHandler(async (req, res) => {
     message: "Account registered successfully",
     user: getUser //return the new object user
   })
-});
+})];
 
 module.exports = handleRegister;
