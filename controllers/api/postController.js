@@ -43,6 +43,7 @@ const createPost = [ validator.validateCreatePost, asyncHandler(async (req, res,
 //get all post middleware controller
 const getAllPost = asyncHandler(async (req, res, next) => {
   const { id } = req.user;
+  const { skip, take } = req.query;
   
   if (!id) {
     const err = new CustomErr(`Unauthorized`, 401);
@@ -50,7 +51,7 @@ const getAllPost = asyncHandler(async (req, res, next) => {
     return
   }
 
-  const posts = await postMethods.getAllPost(id);
+  const posts = await postMethods.getAllPost(id, skip, take);
 
   if (!posts) {
     const err = new CustomErr(`${posts} not found`, 404);
