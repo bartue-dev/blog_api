@@ -7,6 +7,7 @@ router.route("/post/:postId")
   .get(commentCon.getAllComments)
 
 router.route("/:commentId")
+  .get(commentCon.getChildComments)
   .post(commentCon.createChildComment)
   .put(commentCon.updateComment)
   .delete(commentCon.deleteComment)
