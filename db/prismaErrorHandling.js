@@ -13,7 +13,7 @@ const handlePrismaError = (err) => {
        // break;
     case "P2003":
       // handling foreign key constraint
-      return new CustomErr(`P2003: Foreign key constraint failed on the field: ${err}`, 400)
+      return new CustomErr(`P2003: Foreign key constraint failed on the field: ${err.meta.field_name}`, 400)
       //break;
     case "P2025":
       // Operation failed due to records were not found
