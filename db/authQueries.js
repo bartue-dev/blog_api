@@ -76,10 +76,10 @@ class refreshToken {
   }
 
   //delete refresh token
-  async deleteRefreshToken(refreshToken) {
+  async deleteRefreshToken(accountId) {
     return await prisma.refreshToken.delete({
       where: {
-        refreshToken: refreshToken
+        accountId: accountId
       }
     });
   }
