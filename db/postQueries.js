@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
-const { commentMethods } = require("./commentQueries")
+const { commentMethods } = require("./commentQueries");
+const { includeComment } = require("./helper");
 
 const prisma = new PrismaClient();
 
@@ -18,8 +19,10 @@ class Post {
   }
 
   //get all post
-  async getAllPost(authorId, levels = 3) {
+  async getAllPost(authorId, skip = "0", take = takeDefaultVal, levels = 3) {
     return await prisma.post.findMany({
+      skip: +skip,
+      take: +take,
       where: {
         authorId: authorId
       },
@@ -85,20 +88,9 @@ class Post {
   }  
 }
 
-//helper, to hanldle how many child comment include in getAllPost query
-function includeComment(levels) {
-  let query = { childComment: true };
-
-  for (let i = 1; i < levels; i++) {
-    query = { childComment: {include: query} }
-  }
-
-  return query
-}
-
-
 const postMethods = new Post();
 
+const takeDefaultVal = postMethods.getAllPost.length;
 
 module.exports = {
   postMethods
