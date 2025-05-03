@@ -114,6 +114,33 @@ const getAllComments = [validator.validateGetAllComments,asyncHandler(async (req
   })
 })];
 
+//get child comments
+const getChildComments = [validator.validateGetChildComments, asyncHandler(async (req, res, next) => {
+  const { commentId } = req.params;
+  const { id } = req.user;
+
+  if (!id) {
+    const err = new CustomErr(`Unauthorized ${id}`, 401);
+    next(err);
+    return;
+  }
+
+  const childComments = await commentMethods.getChildComments(commentId, id);
+
+  if (!childComments) {
+    const err = new CustomErr(`Comments: ${childComments} cannot be found`, 404);
+    next(err);
+    return
+  }
+
+  res.status(200).json({
+    success: true,
+    data: {
+      childComments
+    }
+  });
+})];
+
 //update comment
 const updateComment = [validator.validateUpdateComment, asyncHandler(async (req, res, next) => {
   const { content } = req.body;
@@ -187,6 +214,7 @@ module.exports = {
   createComment,
   createChildComment,
   getAllComments,
+  getChildComments,
   updateComment,
   deleteComment
 }
