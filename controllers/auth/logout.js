@@ -20,7 +20,7 @@ const handleLogout = asyncHandler(async (req, res, next) => {
 
   const refreshToken = cookies.jwt;
   const currentAccountByToken = await refreshTokenMethods.currentAccountByToken(refreshToken);
-
+  
   //is refresh token in db?
   if (!currentAccountByToken) {
   //delete refreshToken in cookies
@@ -36,8 +36,7 @@ const handleLogout = asyncHandler(async (req, res, next) => {
   }
 
   //delete refreshToken in db
-  await refreshTokenMethods.deleteRefreshToken(refreshToken);
-
+  await refreshTokenMethods.deleteRefreshToken(currentAccountByToken.accountId);
 
   //delete refreshToken in cookies
   res.clearCookie(
