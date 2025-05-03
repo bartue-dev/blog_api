@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
-const { accountMethods, userMethods } = require("../../db/prisma");
+const { accountMethods, userMethods } = require("../../db/authQueries");
 const CustomErr = require("../../utils/customErr");
 const { validationResult } = require("express-validator")
 const validator = require("../../validator/authValidator") 
