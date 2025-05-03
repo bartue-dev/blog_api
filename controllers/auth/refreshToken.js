@@ -2,7 +2,7 @@ require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const CustomErr = require("../../utils/customErr");
-const { refreshTokenMethods } = require("../../db/prisma");
+const { refreshTokenMethods } = require("../../db/authQueries");
 
 
 //refreshToken
