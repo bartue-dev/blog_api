@@ -67,7 +67,7 @@ const getAllPost = asyncHandler(async (req, res, next) => {
 });
 
 //get single post middleware controller
-const getPost = asyncHandler(async (req, res, next) => {
+const getPost = [validator.validateGetPost,asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const { id } = req.user;
 
@@ -77,10 +77,13 @@ const getPost = asyncHandler(async (req, res, next) => {
     return;
   } 
 
-  if (!postId) {
-    const err = new CustomErr(`Invalid postId:${postId}`, 400);
-    next(err)
-    return;
+  //validation
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      fail: true,
+      errors: errors.array()
+    });
   }
 
   const post = await postMethods.getPost(id, postId);
@@ -97,10 +100,10 @@ const getPost = asyncHandler(async (req, res, next) => {
       post
     }
   });
-});
+})];
 
 //update post middleware controller
-const updatePost = [ validator.validateUpdatePost, asyncHandler(async (req, res, next) => {
+const updatePost = [validator.validateUpdatePost, asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const {title, content} = req.body;
   const { id } = req.user;
@@ -137,13 +140,9 @@ const updatePost = [ validator.validateUpdatePost, asyncHandler(async (req, res,
 })];
 
 //delete specifi post middleware controller
-const deletePost = asyncHandler(async (req, res, next) => {
+const deletePost = [validator.validateDeletePost, asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const { id } = req.user;
-
-  console.log("postId",postId);
-  console.log("id",id);
-
 
   if (!id) {
     const err = new CustomErr(`Invalid userId:${id}`, 400);
@@ -151,11 +150,14 @@ const deletePost = asyncHandler(async (req, res, next) => {
     return;
   } 
 
-  if (!postId) {
-    const err = new CustomErr(``, 400);
-    next(err)
-    return;
-  } 
+  //validation
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      fail: true,
+      errors: errors.array()
+    })
+  }
 
   const deletedPost = await postMethods.deletePost(postId, id);
 
@@ -166,7 +168,7 @@ const deletePost = asyncHandler(async (req, res, next) => {
   }
 
   res.sendStatus(204)
-});
+})];
 
 module.exports = {
   createPost,
