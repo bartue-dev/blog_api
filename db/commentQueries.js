@@ -1,5 +1,4 @@
 const { PrismaClient } = require("@prisma/client");
-const { deleteComment } = require("../controllers/api/commentController");
 
 const prisma = new PrismaClient();
 
@@ -39,6 +38,16 @@ class Comment {
     });
   }
 
+  //get child comments
+  async getChildComments(commentId, authorId) {
+    return await prisma.comment.findMany({
+      where: {
+        parentCommentId: commentId,
+        authorId: authorId
+      }
+    });
+  }
+
   //update comment
   async updateComment(content, authorId, commentId){
     return await prisma.comment.update({
@@ -54,8 +63,6 @@ class Comment {
 
   //delete comment recursively
   async deleteComment(commentId, authorId) {
-
-    const msg = "success";
 
     const childComment = await prisma.comment.findMany({
       where:{
@@ -85,7 +92,7 @@ class Comment {
       }
     });
 
-    return msg;
+ 
   }
 }
 
