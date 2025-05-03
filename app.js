@@ -48,6 +48,7 @@ app.use("/log-out", router.logoutRoute);
 //verifiy every api routes for each user
 app.use(verifyJwt); 
 app.use("/api/v1/post", router.postRoute);
+app.use("/api/v1/comment", router.commentRoute);
 
 //default route
 //handles error if the the url cannot find
