@@ -1,5 +1,4 @@
 require("dotenv").config();
-const CustomErr = require("../utils/customErr");
 const handlePrismaError = require("../db/prismaErrorHandling");
 
 //development err
@@ -35,29 +34,17 @@ const prismaRequestErr = (err) => {
  return handlePrismaError(err)
 }
 
-//prisma validation err
-// const prismaValidationErr = (err) => {
-//   const errMsg = "Invalid data";
-
-//   console.log("prismaValidationErr:", err);
-  
-
-//   return new CustomErr(errMsg, 400)
-// }
-
-
+// error handler middleware
 const errorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500; //server err status code
   err.status = err.status || "err"; // client err status code
 
   
   if (process.env.NODE_ENV === "development"){
-    // if (err.name === "PrismaClientValidationError") err = prismaValidationErr(err);
     if (err.name === "PrismaClientKnownRequestError") err = prismaRequestErr(err);
     
     devErr(res, err)
   } else if (process.env.NODE_ENV === "production") {
-    if (err.name === "PrismaClientValidationError") err = prismaValidationErr(err);
     if (err.name === "PrismaClientKnownRequestError") err = prismaRequestErr(err);
 
     prodErr(res, err)
