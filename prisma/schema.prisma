@@ -71,16 +71,16 @@ model Comment {
   updatedAt DateTime @updatedAt
 
   //self relation
-  parentComment   Comment @relation("nestedComment", fields: [parentCommentId], references: [commentId])
-  parentCommentId String
+  parentComment   Comment? @relation("nestedComment", fields: [parentCommentId], references: [commentId], onDelete: Restrict)
+  parentCommentId String?
 
   childComment Comment[] @relation("nestedComment")
 
   //relation
-  post   Post @relation(fields: [postId], references: [postId])
-  author User @relation(fields: [authorId], references: [userId])
+  post   Post? @relation(fields: [postId], references: [postId], onDelete: Cascade)
+  author User  @relation(fields: [authorId], references: [accountId])
 
   //foriegn key
-  postId   String
+  postId   String?
   authorId String
 }
