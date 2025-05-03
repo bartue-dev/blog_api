@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { includeComment } = require("./helper");
 
 const prisma = new PrismaClient();
 
@@ -26,14 +27,16 @@ class Comment {
   }
 
   //get all comments
-  async getAllComments(postId, authorId) {
+  async getAllComments(postId, authorId, levels = 3) {
     return await prisma.comment.findMany({
       where: {
         postId: postId,
         authorId: authorId
       },
       include:{
-        childComment: true
+        childComment: {
+          include: includeComment(levels) 
+        } 
       }
     });
   }
@@ -85,14 +88,12 @@ class Comment {
     });
 
     //then delete the parent comment
-    await prisma.comment.delete({
+    return await prisma.comment.delete({
       where: {
         commentId: commentId,
         authorId: authorId
       }
     });
-
- 
   }
 }
 
