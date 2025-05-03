@@ -24,6 +24,12 @@ const validateGetAllComments = [
     .isUUID().withMessage("postId must be a valid UUID")
 ]
 
+const validateGetChildComments = [
+  param("commentId")
+    .exists().withMessage("CommentId doesn't exist")
+    .isUUID().withMessage("CommentId is not a valid UUID")
+]
+
 const validateUpdateComment = [
   body("content").trim()
     .notEmpty().withMessage(`Content ${isEmptyMsg}`),
@@ -42,6 +48,7 @@ module.exports = {
   validateCreateComment,
   validateCreateChildComment,
   validateGetAllComments,
+  validateGetChildComments,
   validateUpdateComment,
   validateDeleteComment
 }
