@@ -19,7 +19,21 @@ const validateUpdatePost = [
   .isUUID().withMessage("postId must be a valid UUID")
 ]
 
+const validateGetPost = [
+  param("postId")
+    .exists().withMessage("postId doesn't exist")
+    .isUUID().withMessage("postId is not a valid UUID")
+]
+
+const validateDeletePost = [
+  param("postId")
+    .exists().withMessage("postId doesn't exist")
+    .isUUID().withMessage("postId is not a valid UUID")
+]
+
 module.exports = {
   validateCreatePost,
-  validateUpdatePost
+  validateUpdatePost,
+  validateGetPost,
+  validateDeletePost
 }
