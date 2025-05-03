@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const CustomErr = require("../../utils/customErr");
-const { accountMethods, refreshTokenMethods } = require("../../db/prisma");
+const { accountMethods, refreshTokenMethods } = require("../../db/authQueries");
 const { validationResult } = require("express-validator"); 
 const validator = require("../../validator/authValidator");
 
