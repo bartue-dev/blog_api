@@ -1,8 +1,8 @@
 const asyncHandler = require("express-async-handler");
-const { postMethods } = require("../../db/prisma");
+const { postMethods } = require("../../db/postQueries");
 const CustomErr = require("../../utils/customErr");
 const { validationResult } = require("express-validator");
-const validator = require("../../validator/apiValidator");
+const validator = require("../../validator/postValidator");
 
 //create post middleware controller
 const createPost = [ validator.validateCreatePost, asyncHandler(async (req, res, next) => {
@@ -140,6 +140,10 @@ const updatePost = [ validator.validateUpdatePost, asyncHandler(async (req, res,
 const deletePost = asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const { id } = req.user;
+
+  console.log("postId",postId);
+  console.log("id",id);
+
 
   if (!id) {
     const err = new CustomErr(`Invalid userId:${id}`, 400);
