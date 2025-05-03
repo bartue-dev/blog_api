@@ -11,6 +11,10 @@ const handlePrismaError = (err) => {
       // handling duplicate err
        return new CustomErr(`P2002: ${err.meta.target} already exist`, 400);
        // break;
+    case "P2003":
+      // handling foreign key constraint
+      return new CustomErr(`P2003: Foreign key constraint failed on the field: ${err}`, 400)
+      //break;
     case "P2025":
       // Operation failed due to records were not found
        return new CustomErr(`P2025: ${err.meta.cause}`, 400);
