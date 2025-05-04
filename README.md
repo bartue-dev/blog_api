@@ -31,6 +31,33 @@
   </ol>
 </details>
 
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+Blog_api is a personal project. It is a common blog api. It can create post, comment and like post of others.
+
+Key features:
+* Register - client side register an account.
+* Log-in - client side log-in the registered account. Then the api return an accesstoken as json response.
+* Create:
+  - client side can create a post with title and content field.
+  - client side can create a comment to a post and child comment to a parent comment.
+* Read
+  - client side can get all post, get specific post and get post with pagination 
+  - client side can get all comments, get specific child comment that is associated with parent comment and get comment/child comment with pagination 
+* Update
+  - client side can update specific post and comment
+* Delete
+  - client side can delete specific post and comment
+
+Others:
+* Authentication - Uses a **jsonwebtoken**(jwt) for authentication/authorization.
+* Validation - returns a validation errors if client input a wrong api request
+
+see the api documentation for more details of the usage of the api
+[blog_api documentation](https://docs.google.com/document/d/1EVqc4WGtDFdJLphWsGHcV_4ZYO8gyRR61GWRmNNHdeE/edit?tab=t.0)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
