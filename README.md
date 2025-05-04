@@ -35,6 +35,11 @@
 ### Built With
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+* [![Express.js][Express.js-badge]][Express.js-url]
+* [![JWT][JWT-badge]][JWT-url]
+* [![bcryptjs][bcryptjs-badge]][bcryptjs-url]
+* [![Prisma][Prisma-badge]][Prisma-url]
+* [![express-validator][express-validator-badge]][express-validator-url]
 
 <!-- BADGES -->
 [Express.js]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
