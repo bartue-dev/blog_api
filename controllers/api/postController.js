@@ -51,7 +51,13 @@ const getAllPost = asyncHandler(async (req, res, next) => {
     return
   }
 
-  const posts = await postMethods.getAllPost(id, skip, take);
+  let posts;
+
+  if (skip !== undefined && take !== undefined) {
+    posts = await postMethods.getAllPostWithPagination(id, skip, take) 
+  } else {
+    posts = await postMethods.getAllPost(id);
+  }
 
   if (!posts) {
     const err = new CustomErr(`${posts} not found`, 404);
