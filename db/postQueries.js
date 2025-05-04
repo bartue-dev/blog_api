@@ -19,18 +19,32 @@ class Post {
   }
 
   //get all post
-  async getAllPost(authorId, skip = "0", take = takeDefaultVal, levels = 3) {
+  async getAllPost(authorId, levels = 3) {
+    return await prisma.post.findMany({
+      where: {
+          authorId: authorId
+        },
+        include: {
+          comment: {
+            include: includeComment(levels)
+          }
+        }
+    });
+  }
+
+  //get all post with pagination
+  async getAllPostWithPagination(authorId, skip, take, levels = 3) {
     return await prisma.post.findMany({
       skip: +skip,
       take: +take,
       where: {
-        authorId: authorId
-      },
-      include: {
-        comment: {
-          include: includeComment(levels)
+          authorId: authorId
+        },
+        include: {
+          comment: {
+            include: includeComment(levels)
+          }
         }
-      }
     });
   }
 
