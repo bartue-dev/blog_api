@@ -39,7 +39,7 @@ Blog_api is a personal project. It is a common blog api. It can create post, com
 
 Key features:
 * Register - client side register an account.
-* Log-in - client side log-in the registered account. Then the api return an accesstoken as json response.
+* Log-in - client side log-in the registered account. Then the api return an accesstoken as json response and refresh token save in cookies and database.
 * Create:
   - client side can create a post with title and content field.
   - client side can create a comment to a post and child comment to a parent comment.
@@ -51,6 +51,8 @@ Key features:
   - client side can update specific post and comment
 * Delete
   - client side can delete specific post and comment
+  - note: if post is delete all the comment and child comment associated with it will be deleted.
+  - note: if comment is delete all child comment will also be deleted.
 
 Others:
 * Authentication - Uses a **jsonwebtoken**(jwt) for authentication/authorization.
@@ -96,3 +98,34 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] register
+- [x] sign-in
+    - [x] access token in reponse
+    - [x] refresh token save in cookies and database
+- [x] createPost
+- [x] getAllPost 
+    - [x] with offset pagination
+- [x] getPost route
+- [x] updatePost 
+- [x] deletePost 
+    - [x] delete all comments that is associated with the post
+    - [ ] delete the post in like database
+- [x] createComment 
+- [x] createChildComment
+- [x] getAllComment
+    - [ ] with offset pagination
+- [x] getChildComment 
+- [x] updateComment 
+- [x] deleteComment
+    - [x] delete all chid comments that is associated with the comment
+- [ ] saveLikedPost 
+- [ ] getAllLikedPost 
+- [ ] getLikedPost 
+- [ ] deleteLikedPost 
+
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
