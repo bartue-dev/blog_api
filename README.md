@@ -58,8 +58,8 @@ Others:
 * Prisma error response - Uses the prisma error handling. Handles errors of queries.
 * Pagination - Control the data that will be return in response. Uses the offset pagination in prisma queries.
 
-see the api documentation for more details of the usage of the api
-[blog_api documentation](https://docs.google.com/document/d/1EVqc4WGtDFdJLphWsGHcV_4ZYO8gyRR61GWRmNNHdeE/edit?tab=t.0)
+see the [api](https://docs.google.com/document/d/1EVqc4WGtDFdJLphWsGHcV_4ZYO8gyRR61GWRmNNHdeE/edit?tab=t.0) documentation for more details of the usage of the api
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
