@@ -42,9 +42,10 @@ Key features:
 * Create:
   - client side can create a post with title and content field.
   - client side can create a comment to a post and child comment to a parent comment.
+  - client side can like a post of others
 * Read
   - client side can get all post, get specific post and get post with pagination 
-  - client side can get all comments, get specific child comment that is associated with parent comment and get comment/child comment with pagination 
+  - client side can get all comments, get specific child comment that is associated with parent comment and get comment/child comment with pagination
 * Update
   - client side can update specific post and comment
 * Delete
@@ -52,7 +53,10 @@ Key features:
 
 Others:
 * Authentication - Uses a **jsonwebtoken**(jwt) for authentication/authorization.
-* Validation - returns a validation errors if client input a wrong api request
+* Validation - Uses a express-validator to return a validation errors if client input a invalid api request
+* Error response - Created a custom error that handles the error response to every api request
+* Prisma error response - Uses the prisma error handling. Handles errors of queries.
+* Pagination - Control the data that will be return in response. Uses the offset pagination in prisma queries.
 
 see the api documentation for more details of the usage of the api
 [blog_api documentation](https://docs.google.com/document/d/1EVqc4WGtDFdJLphWsGHcV_4ZYO8gyRR61GWRmNNHdeE/edit?tab=t.0)
@@ -68,6 +72,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [![bcryptjs][bcryptjs-badge]][bcryptjs-url]
 * [![Prisma][Prisma-badge]][Prisma-url]
 * [![express-validator][express-validator-badge]][express-validator-url]
+* [![PostgreSQL][PostgreSQL-badge]][PostgreSQL-url]
 
 <!-- BADGES -->
 [Express.js-badge]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
@@ -85,6 +90,8 @@ This section should list any major frameworks/libraries used to bootstrap your p
 [express-validator-badge]: https://img.shields.io/badge/express--validator-6A1B9A?style=for-the-badge
 [express-validator-url]: https://express-validator.github.io/docs/
 
+[PostgreSQL-badge]: https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white
+[PostgreSQL-url]: https://www.postgresql.org/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
