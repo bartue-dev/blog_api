@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <image src="https://github.com/user-attachments/assets/b3dc80ba-8804-4cbd-bc6b-dd31fbb679ba" width="150px"/>
+  <image src="https://github.com/user-attachments/assets/b3dc80ba-8804-4cbd-bc6b-dd31fbb679ba" width="100px"/>
   <h2 align="center">Blog_api</h2>
 </div>
 
@@ -30,4 +30,14 @@
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
+
+
+### Built With
+
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
+* [![Express][Express.js]][Express-url]
+* [![JWT][JWT.js]][JWT-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
