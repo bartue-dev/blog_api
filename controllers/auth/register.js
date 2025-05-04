@@ -5,7 +5,7 @@ const CustomErr = require("../../utils/customErr");
 const { validationResult } = require("express-validator")
 const validator = require("../../validator/authValidator") 
 
-const handleRegister =[ validator.validateRegister, asyncHandler(async (req, res) => {
+const handleRegister =[ validator.validateRegister, asyncHandler(async (req, res, next) => {
   const {username, password, email} = req.body;
   const errors = validationResult(req);
 
