@@ -42,10 +42,17 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [![express-validator][express-validator-badge]][express-validator-url]
 
 <!-- BADGES -->
-[Express.js]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
-[Express-url]: https://expressjs.com/
+* [![Express.js][Express.js-badge]][Express.js-url]
+* [![JWT][JWT-badge]][JWT-url]
+* [![bcryptjs][bcryptjs-badge]][bcryptjs-url]
+* [![Prisma][Prisma-badge]][Prisma-url]
+* [![express-validator][express-validator-badge]][express-validator-url]
 
-[JWT.js]: https://img.shields.io/badge/JWT-FFB600?style=for-the-badge&logo=jsonwebtokens&logoColor=black
+<!-- BADGES -->
+[Express.js-badge]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
+[Express.js-url]: https://expressjs.com/
+
+[JWT-badge]: https://img.shields.io/badge/JWT-FFB600?style=for-the-badge&logo=jsonwebtokens&logoColor=black
 [JWT-url]: https://jwt.io/
 
 [bcryptjs-badge]: https://img.shields.io/badge/bcryptjs-003A70?style=for-the-badge
@@ -56,6 +63,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 [express-validator-badge]: https://img.shields.io/badge/express--validator-6A1B9A?style=for-the-badge
 [express-validator-url]: https://express-validator.github.io/docs/
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
