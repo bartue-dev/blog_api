@@ -3,9 +3,5 @@
 <br />
 <div align="center">
   <h3 align="center">Blog_api</h3>
-
-  <p align="center">
-    A personal project. Able to create posts and comments. And able to like a post.
-  </p>
 </div>
-</p>
+
