@@ -39,5 +39,12 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [![Express][Express.js]][Express-url]
 * [![JWT][JWT.js]][JWT-url]
 
+<!-- BADGES -->
+[Express.js]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
+[Express-url]: https://expressjs.com/
+
+[JWT.js]: https://img.shields.io/badge/JWT-FFB600?style=for-the-badge&logo=jsonwebtokens&logoColor=black
+[JWT-url]: https://jwt.io/
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
