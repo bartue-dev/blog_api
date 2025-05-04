@@ -61,7 +61,7 @@ Others:
 see the [api](https://docs.google.com/document/d/1EVqc4WGtDFdJLphWsGHcV_4ZYO8gyRR61GWRmNNHdeE/edit?tab=t.0) documentation for more details of the usage of the api
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="https://github.com/bartue-dev/blog_api/blob/main/README.md">back to top</a>)</p>
 
 ### Built With
 
@@ -93,5 +93,5 @@ This section should list any major frameworks/libraries used to bootstrap your p
 [PostgreSQL-badge]: https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white
 [PostgreSQL-url]: https://www.postgresql.org/
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="https://github.com/bartue-dev/blog_api/blob/main/README.md">back to top</a>)</p>
 
