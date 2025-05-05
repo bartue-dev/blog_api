@@ -35,8 +35,9 @@ model User {
   accountId String @unique
 
   //scalar list
-  post    Post[]
-  comment Comment[]
+  post      Post[]
+  comment   Comment[]
+  likedPost LikedPost[]
 }
 
 model RefreshToken {
@@ -61,7 +62,8 @@ model Post {
   authorId String
 
   //scalar list
-  comment Comment[]
+  comment   Comment[]
+  likedPost LikedPost[]
 }
 
 model Comment {
@@ -82,5 +84,17 @@ model Comment {
 
   //foriegn key
   postId   String?
+  authorId String
+}
+
+model LikedPost {
+  likedId String   @id @default(uuid())
+  likedAt DateTime @default(now())
+
+  //relation
+  post   Post @relation(fields: [postId], references: [postId], onDelete: Cascade)
+  author User @relation(fields: [authorId], references: [accountId], onDelete: Cascade)
+
+  postId   String @unique
   authorId String
 }
