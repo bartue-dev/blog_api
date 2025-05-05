@@ -1,8 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
 const { commentMethods } = require("./commentQueries");
-const { includeComment } = require("./helper");
-
-const prisma = new PrismaClient();
+const { includeComment, prisma } = require("./helper");
 
 //post queries
 class Post {
