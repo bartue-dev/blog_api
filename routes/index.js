@@ -7,6 +7,7 @@ const logoutRoute = require("./auth/logout");
 //api
 const postRoute = require("./api/post");
 const commentRoute = require("./api/comment");
+const likedPostRoute = require("./api/likedPost")
 
 module.exports = {
   registerRoute,
@@ -14,5 +15,6 @@ module.exports = {
   refreshTokenRoute,
   logoutRoute,
   postRoute,
-  commentRoute
+  commentRoute,
+  likedPostRoute
 }
