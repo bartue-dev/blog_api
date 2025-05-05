@@ -1,7 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const { includeComment } = require("./helper");
-
-const prisma = new PrismaClient();
+const { includeComment, prisma } = require("./helper");
 
 class Comment {
   //create comment
