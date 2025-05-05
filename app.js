@@ -49,6 +49,7 @@ app.use("/log-out", router.logoutRoute);
 app.use(verifyJwt); 
 app.use("/api/v1/post", router.postRoute);
 app.use("/api/v1/comment", router.commentRoute);
+app.use("/api/v1/liked-post", router.likedPostRoute)
 
 //default route
 //handles error if the the url cannot find
