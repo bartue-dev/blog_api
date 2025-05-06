@@ -23,7 +23,7 @@ const handleSignin =[ validator.validateSignin ,asyncHandler(async (req, res, ne
   const currentAccountByUsername = await accountMethods.currentAccountByUsername(username);
 
   if (!currentAccountByUsername) {
-    const err = new CustomErr(`User not found ${username}, register an account first`, 404)
+    const err = new CustomErr(`Incorrect username: ${username}`, 400)
     next(err);
     return;
   }
