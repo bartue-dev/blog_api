@@ -28,7 +28,7 @@ All API request require authentication using Bearer Token
 
 ### Register an account
 
-**Endpoint:** <table><tr><td>POST/register.</td></tr></table>
+**Endpoint:** <table><tr><td>POST/register</td></tr></table>
 
 ### Request Body:
 
@@ -44,7 +44,7 @@ All API request require authentication using Bearer Token
 
 ### Sign in to get an Authentication Token
 
-**Endpoint:**<table><tr><td>POST/sign-in.</td></tr></table>
+**Endpoint:**<table><tr><td>POST/sign-in</td></tr></table>
 
 ### Request Body:
 
@@ -74,9 +74,78 @@ Standard HTTP status codes. Indicates the success or failure of the requests.
 ### Error response Format
 
 ```
-  "status": "statusCode",
+  "status": "status_code",
   "message": "error_message",
   "error": {
     "additional_error_details"
   }
 ```
+
+### API Endpoints
+
+### POST
+
+Create post
+
+**Endpoint:**<table><tr><td>POST /api/v1/post</td></tr></table>
+
+### Request Body:
+
+```
+{
+  "title": "your_post_title",
+  "content": "your_post_content"
+}
+```
+
+### Response:
+
+```
+{
+  "success": true,
+  "data": {
+    "post": {
+      "postId": "UUID_type",
+      "title": "your_post_title",
+      "content": "your_post_content",
+      "createdAt": "2025-05-06T12:20:45.196Z",
+      "updatedAt": "2025-05-06T12:20:45.196Z",
+      "authorId": "UUID_type"
+    }
+  }
+}
+```
+
+---
+
+Create comment
+
+**Endpoint:**<table><tr><td>POST /api/v1/comment/post/{postId}</td></tr></table>
+
+### Request Body:
+
+```
+{
+  "content": "your_comment_content"
+}
+```
+
+### Response:
+
+```
+{
+  "success": true,
+  "data": {
+    "post": {
+      "postId": "UUID_type",
+      "title": "your_post_title",
+      "content": "your_post_content",
+      "createdAt": "2025-05-06T12:20:45.196Z",
+      "updatedAt": "2025-05-06T12:20:45.196Z",
+      "authorId": "UUID_type"
+    }
+  }
+}
+```
+
+---
