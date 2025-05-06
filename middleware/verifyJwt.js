@@ -25,6 +25,11 @@ const verifyJwt = (req, res, next) => {
     (err, decoded) => {
       if (err) {
         console.log("token verify error:", err.name);
+        if (err.name === "TokenExpiredError") {
+          const customErr = new CustomErr(`Access Token Expires`, 403)
+          next(customErr);
+          return
+        }
         const customErr = new CustomErr(`Invalid token`, 403);
         next(customErr);
         return
