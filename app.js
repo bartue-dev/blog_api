@@ -44,12 +44,15 @@ app.use("/sign-in", router.signinRoute);
 app.use("/refreshToken", router.refreshTokenRoute);
 app.use("/log-out", router.logoutRoute);
 
+//public routes
+app.use("/v1/api",router.publicData)
+
 //api routes
 //verifiy every api routes for each user
 app.use(verifyJwt); 
-app.use("/api/v1/post", router.postRoute);
-app.use("/api/v1/comment", router.commentRoute);
-app.use("/api/v1/liked-post", router.likedPostRoute)
+app.use("/v1/api/post", router.postRoute);
+app.use("/v1/api/comment", router.commentRoute);
+app.use("/v1/api/liked-post", router.likedPostRoute)
 
 //default route
 //handles error if the the url cannot find
