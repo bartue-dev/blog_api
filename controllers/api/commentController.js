@@ -82,6 +82,7 @@ const createChildComment = [validator.validateCreateChildComment, asyncHandler(a
 const getAllComments = [validator.validateGetAllComments,asyncHandler(async (req, res, next) => {
   const { postId } = req.params
   const { id } = req.user;
+  const { skip, take } = req.query;
 
   if (!id) {
     const err = new CustomErr(`Unauthorized: ${postId}`, 401);
@@ -98,7 +99,13 @@ const getAllComments = [validator.validateGetAllComments,asyncHandler(async (req
     })
   }
 
-  const allComments = await commentMethods.getAllComments(postId, id);
+  let allComments;
+  if (skip !== undefined && take !== undefined) {
+    allComments = await commentMethods.getAllComments(postId, id, skip, take);
+  } else {
+    allComments = await commentMethods.getAllComments(postId, id);
+  }
+
 
   if (!allComments) {
     const err = new CustomErr(`Comments: ${allComments} cannot be found`, 400);
