@@ -24,11 +24,10 @@ class Comment {
   }
 
   //get all comments
-  async getAllComments(postId, authorId, levels = 3) {
+  async getAllComments(postId, levels = 3) {
     return await prisma.comment.findMany({
       where: {
         postId: postId,
-        authorId: authorId
       },
       include:{
         childComment: {
@@ -39,13 +38,12 @@ class Comment {
   }
 
   //get all comments with pagination
-  async getAllCommentsWithPagination(postId, authorId, skip, take, levels = 3) {
+  async getAllCommentsWithPagination(postId, skip, take, levels = 3) {
     return await prisma.comment.findMany({
       skip: +skip,
       take: +take,
       where: {
         postId: postId,
-        authorId: authorId
       },
       include:{
         childComment: {
@@ -56,11 +54,21 @@ class Comment {
   }
 
   //get child comments
-  async getChildComments(commentId, authorId) {
+  async getChildComments(commentId) {
     return await prisma.comment.findMany({
       where: {
-        parentCommentId: commentId,
-        authorId: authorId
+        parentCommentId: commentId
+      }
+    });
+  }
+
+  //get child comments with pagination
+  async getChildCommentsWithPagination(commentId, skip, take) {
+    return await prisma.comment.findMany({
+      skip: +skip,
+      take: +take,
+      where: {
+        parentCommentId: commentId
       }
     });
   }
