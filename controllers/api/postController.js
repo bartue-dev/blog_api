@@ -4,7 +4,7 @@ const CustomErr = require("../../utils/customErr");
 const { validationResult } = require("express-validator");
 const validator = require("../../validator/postValidator");
 
-//create post middleware controller
+//create post
 const createPost = [ validator.validateCreatePost, asyncHandler(async (req, res, next) => {
   const { title, content } = req.body;
   const { id } = req.user;
@@ -19,8 +19,9 @@ const createPost = [ validator.validateCreatePost, asyncHandler(async (req, res,
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      fail: true,
-      errors: errors.array()
+      status: 400,
+      message: "validation error",
+      error: errors.array()
     });
   }
 
@@ -40,7 +41,7 @@ const createPost = [ validator.validateCreatePost, asyncHandler(async (req, res,
   });
 })];
 
-//get all post middleware controller
+//get all post with specific user
 const getAllPost = asyncHandler(async (req, res, next) => {
   const { id } = req.user;
   const { skip, take } = req.query;
@@ -73,7 +74,7 @@ const getAllPost = asyncHandler(async (req, res, next) => {
   });
 });
 
-//get single post middleware controller
+//get single post with specific user
 const getPost = [validator.validateGetPost,asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const { id } = req.user;
@@ -84,14 +85,15 @@ const getPost = [validator.validateGetPost,asyncHandler(async (req, res, next) =
     return;
   } 
 
-  //validation
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      fail: true,
-      errors: errors.array()
-    });
-  }
+ //validation
+ const errors = validationResult(req);
+ if (!errors.isEmpty()) {
+   return res.status(400).json({
+     status: 400,
+     message: "validation error",
+     error: errors.array()
+   });
+ }
 
   const post = await postMethods.getPost(id, postId);
 
@@ -109,7 +111,7 @@ const getPost = [validator.validateGetPost,asyncHandler(async (req, res, next) =
   });
 })];
 
-//update post middleware controller
+//update post
 const updatePost = [validator.validateUpdatePost, asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const {title, content} = req.body;
@@ -125,8 +127,9 @@ const updatePost = [validator.validateUpdatePost, asyncHandler(async (req, res, 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      fail: true,
-      errors: errors.array()
+      status: 400,
+      message: "validation error",
+      error: errors.array()
     });
   }
 
@@ -146,7 +149,7 @@ const updatePost = [validator.validateUpdatePost, asyncHandler(async (req, res, 
   });
 })];
 
-//delete specifi post middleware controller
+//delete specifi post
 const deletePost = [validator.validateDeletePost, asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
   const { id } = req.user;
@@ -161,9 +164,10 @@ const deletePost = [validator.validateDeletePost, asyncHandler(async (req, res, 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      fail: true,
-      errors: errors.array()
-    })
+      status: 400,
+      message: "validation error",
+      error: errors.array()
+    });
   }
 
   const deletedPost = await postMethods.deletePost(postId, id);
