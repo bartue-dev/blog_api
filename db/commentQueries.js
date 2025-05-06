@@ -38,6 +38,23 @@ class Comment {
     });
   }
 
+  //get all comments with pagination
+  async getAllCommentsWithPagination(postId, authorId, skip, take, levels = 3) {
+    return await prisma.comment.findMany({
+      skip: +skip,
+      take: +take,
+      where: {
+        postId: postId,
+        authorId: authorId
+      },
+      include:{
+        childComment: {
+          include: includeComment(levels) 
+        } 
+      }
+    });
+  }
+
   //get child comments
   async getChildComments(commentId, authorId) {
     return await prisma.comment.findMany({
