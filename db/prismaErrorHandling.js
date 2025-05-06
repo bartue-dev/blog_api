@@ -5,7 +5,7 @@ const handlePrismaError = (err) => {
   switch (err.code){
     case "P2001": 
       // record not found
-       return new CustomErr(`P2001: ${err.meta.cause}`, 400);
+       return new CustomErr(`P2001: ${err.meta.cause}`, 404);
        // break;
     case "P2002": 
       // handling duplicate err
@@ -13,11 +13,11 @@ const handlePrismaError = (err) => {
        // break;
     case "P2003":
       // handling foreign key constraint
-      return new CustomErr(`P2003: Data doesn't exist anyware in the database: ${err.meta.field_name}`, 400)
+      return new CustomErr(`P2003: Data doesn't exist in the database: ${err.meta.field_name}`, 400)
       //break;
     case "P2025":
       // Operation failed due to records were not found
-       return new CustomErr(`P2025: ${err.meta.cause}`, 400);
+       return new CustomErr(`P2025: ${err.meta.cause}`, 404);
        // break;
     default: 
       // handling other err
