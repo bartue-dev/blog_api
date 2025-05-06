@@ -20,13 +20,15 @@ const createComment = [validator.validateCreateComment, asyncHandler(async (req,
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      fail: true,
-      errors: errors.array()
+      status: 400,
+      message: "validation error",
+      error: errors.array()
     });
   }
 
   const createdComment = await commentMethods.createComment(content, id, postId);
 
+  //check if createdComment return a value if not...
   if (!createdComment) {
     const err = new CustomErr(`Comment; ${createdComment} cannot be created`, 400)
     next(err)
@@ -53,14 +55,15 @@ const createChildComment = [validator.validateCreateChildComment, asyncHandler(a
     return;
   }
 
-   //validation
-   const errors = validationResult(req);
-   if (!errors.isEmpty()) {
-     return res.status(400).json({
-       fail: true,
-       errors: errors.array()
-     });
-   }
+  //validation
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      status: 400,
+      message: "validation error",
+      error: errors.array()
+    });
+  }
 
   const childComment = await commentMethods.creatChildComment(content, id, commentId);
 
@@ -94,16 +97,17 @@ const getAllComments = [validator.validateGetAllComments,asyncHandler(async (req
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      fail: true,
-      errors: errors.array()
-    })
+      status: 400,
+      message: "validation error",
+      error: errors.array()
+    });
   }
 
   let allComments;
   if (skip !== undefined && take !== undefined) {
-    allComments = await commentMethods.getAllComments(postId, id, skip, take);
+    allComments = await commentMethods.getAllComments(postId, skip, take);
   } else {
-    allComments = await commentMethods.getAllComments(postId, id);
+    allComments = await commentMethods.getAllComments(postId);
   }
 
 
@@ -125,6 +129,7 @@ const getAllComments = [validator.validateGetAllComments,asyncHandler(async (req
 const getChildComments = [validator.validateGetChildComments, asyncHandler(async (req, res, next) => {
   const { commentId } = req.params;
   const { id } = req.user;
+  const { skip, take } = req.query
 
   if (!id) {
     const err = new CustomErr(`Unauthorized ${id}`, 401);
@@ -132,7 +137,13 @@ const getChildComments = [validator.validateGetChildComments, asyncHandler(async
     return;
   }
 
-  const childComments = await commentMethods.getChildComments(commentId, id);
+  let childComments;
+  if (skip !== undefined && take !== undefined) {
+    childComments = await commentMethods.getChildCommentsWithPagination(commentId, skip, take);
+  } else {
+    childComments = await commentMethods.getChildComments(commentId);
+  }
+
 
   if (!childComments) {
     const err = new CustomErr(`Comments: ${childComments} cannot be found`, 404);
@@ -160,14 +171,15 @@ const updateComment = [validator.validateUpdateComment, asyncHandler(async (req,
     return
   }
 
-  //validation
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      fail: true,
-      errors: errors.array()
-    });
-  }
+ //validation
+ const errors = validationResult(req);
+ if (!errors.isEmpty()) {
+   return res.status(400).json({
+     status: 400,
+     message: "validation error",
+     error: errors.array()
+   });
+ }
 
   const updatedComment = await commentMethods.updateComment(content, id, commentId);
 
@@ -200,8 +212,9 @@ const deleteComment = [validator.validateDeleteComment, asyncHandler(async (req,
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      fail: true,
-      errors: errors.array()
+      status: 400,
+      message: "validation error",
+      error: errors.array()
     });
   }
 
