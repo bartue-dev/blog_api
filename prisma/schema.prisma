@@ -80,7 +80,7 @@ model Comment {
 
   //relation
   post   Post? @relation(fields: [postId], references: [postId], onDelete: Cascade)
-  author User  @relation(fields: [authorId], references: [accountId])
+  author User  @relation(fields: [authorId], references: [accountId], onDelete: Cascade)
 
   //foriegn key
   postId   String?
