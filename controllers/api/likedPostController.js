@@ -18,8 +18,9 @@ const saveLikedPost = [validateSaveLikedPost, asyncHanlder(async (req, res, next
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      fail: true,
-      errors: errors.array()
+      status: 400,
+      message: "validation error",
+      error: errors.array()
     });
   }
 
@@ -78,8 +79,9 @@ const undoLikedPost = [validateUndoLikedPost, asyncHanlder(async (req, res, next
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      fail: true,
-      errors: errors.array()
+      status: 400,
+      message: "validation error",
+      error: errors.array()
     });
   }
 
