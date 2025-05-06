@@ -15,7 +15,7 @@ class Post {
     });
   }
 
-  //get all post
+  //get all post with specific user
   async getAllPost(authorId, levels = 3) {
     return await prisma.post.findMany({
       where: {
@@ -29,7 +29,7 @@ class Post {
     });
   }
 
-  //get all post with pagination
+  //get all post with pagination with specific user
   async getAllPostWithPagination(authorId, skip, take, levels = 3) {
     return await prisma.post.findMany({
       skip: +skip,
@@ -97,6 +97,11 @@ class Post {
       }
     });
   }  
+
+  //get public posts in the database
+  async getPublicPosts() {
+  return await prisma.post.findMany()
+}
 }
 
 const postMethods = new Post();
