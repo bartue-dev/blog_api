@@ -57,7 +57,16 @@ All API request require authentication using Bearer Token
 }
 ```
 
-### Response: 200 OK
+### Response:
+
+```
+{
+  "accessToken": "access_token",
+  "success": true,
+  "message": "Log in sucessful"
+}
+
+```
 
 ---
 
