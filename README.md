@@ -66,7 +66,7 @@ Others:
 -   Prisma error response - Uses the prisma error handling. Handles errors of queries.
 -   Pagination - Control the data that will be return in response. Uses the offset pagination in prisma queries.
 
-see the <a href="https://github.com/bartue-dev/blog_api/blob/main/api-documentation.md" target="blank"> api documentation</a> for more details of the usage of the api
+see the <a href="https://github.com/bartue-dev/blog_api/blob/main/api-documentation.md" target="_blank"> api documentation</a> for more details of the usage of the api
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
