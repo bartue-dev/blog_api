@@ -119,7 +119,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 -   [x] createComment
 -   [x] createChildComment
 -   [x] getAllComment
-    -   [ ] with offset pagination
+    -   [x] with offset pagination
 -   [x] getChildComment
 -   [x] updateComment
 -   [x] deleteComment
