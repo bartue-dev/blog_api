@@ -11,7 +11,7 @@ const handleRefreshToken = asyncHandler(async (req, res, next) => {
   const cookies = req.cookies;
 
   if (!cookies?.jwt) {
-    const err = CustomErr(`Unauthorize`, 401)
+    const err = new CustomErr(`Unauthorize`, 401)
     next(err);
     return
   }
