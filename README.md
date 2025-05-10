@@ -66,11 +66,10 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- BADGES -->
 
 -   [![Express.js][Express.js-badge]][Express.js-url]
--   [![JWT][JWT-badge]][JWT-url]
--   [![bcryptjs][bcryptjs-badge]][bcryptjs-url]
 -   [![Prisma][Prisma-badge]][Prisma-url]
--   [![express-validator][express-validator-badge]][express-validator-url]
 -   [![PostgreSQL][PostgreSQL-badge]][PostgreSQL-url]
+-   [![JWT][JWT-badge]][JWT-url]
+-   [![express-validator][express-validator-badge]][express-validator-url]
 
 <!-- BADGES -->
 
@@ -84,8 +83,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
 [JWT-url]: https://jwt.io/
 [express-validator-badge]: https://img.shields.io/badge/express--validator-6A1B9A?style=for-the-badge
 [express-validator-url]: https://express-validator.github.io/docs/
-[bcryptjs-badge]: https://img.shields.io/badge/bcryptjs-003A70?style=for-the-badge
-[bcryptjs-url]: https://www.npmjs.com/package/bcryptjs
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
