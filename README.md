@@ -61,8 +61,6 @@ see the <a href="https://github.com/bartue-dev/blog_api/blob/main/api-documentat
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 <!-- BADGES -->
 
 -   [![Express.js][Express.js-badge]][Express.js-url]
