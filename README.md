@@ -76,16 +76,16 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 [Express.js-badge]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
 [Express.js-url]: https://expressjs.com/
-[JWT-badge]: https://img.shields.io/badge/JWT-FFB600?style=for-the-badge&logo=jsonwebtokens&logoColor=black
-[JWT-url]: https://jwt.io/
-[bcryptjs-badge]: https://img.shields.io/badge/bcryptjs-003A70?style=for-the-badge
-[bcryptjs-url]: https://www.npmjs.com/package/bcryptjs
 [Prisma-badge]: https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white
 [Prisma-url]: https://www.prisma.io/
-[express-validator-badge]: https://img.shields.io/badge/express--validator-6A1B9A?style=for-the-badge
-[express-validator-url]: https://express-validator.github.io/docs/
 [PostgreSQL-badge]: https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white
 [PostgreSQL-url]: https://www.postgresql.org/
+[JWT-badge]: https://img.shields.io/badge/JWT-FFB600?style=for-the-badge&logo=jsonwebtokens&logoColor=black
+[JWT-url]: https://jwt.io/
+[express-validator-badge]: https://img.shields.io/badge/express--validator-6A1B9A?style=for-the-badge
+[express-validator-url]: https://express-validator.github.io/docs/
+[bcryptjs-badge]: https://img.shields.io/badge/bcryptjs-003A70?style=for-the-badge
+[bcryptjs-url]: https://www.npmjs.com/package/bcryptjs
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
