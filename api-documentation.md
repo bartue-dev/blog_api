@@ -7,6 +7,7 @@ v1
 ### Overview
 
 This REST API provides CRUD (Create, Read, Update, Delete) operations with jsonwebtoken(JWT) authentication.
+You can use Postman, Curl or any API testing tools.
 
 ### Base URL
 
