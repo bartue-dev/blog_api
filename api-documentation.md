@@ -8,8 +8,6 @@ v1
 
 This REST API provides CRUD (Create, Read, Update, Delete) operations with jsonwebtoken(JWT) authentication.
 
-live server [server](https://blog-api-0nvl.onrender.com)
-
 ### Base URL
 
 ```
