@@ -7,11 +7,13 @@ v1
 ### Overview
 
 This REST API provides CRUD (Create, Read, Update, Delete) operations with jsonwebtoken(JWT) authentication.
+<br/>
+You can use Postman, Curl or any API testing tools.
 
 ### Base URL
 
 ```
-  http://localhost:3000
+  https://blog-api-0nvl.onrender.com/
 ```
 
 ### Authentication
