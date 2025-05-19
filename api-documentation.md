@@ -266,6 +266,42 @@ Save liked post
 
 ### GET
 
+Get public post
+
+**Endpoint:**<table><tr><td>GET /v1/api</td></tr></table>
+
+### Response:
+
+```
+{
+    "success": true,
+    "data": {
+      "posts": [
+        {
+          "postId": "UUID_type",
+          "title": "post_title",
+          "content": "post_content",
+          "createdAt": "2025-05-06T13:01:59.988Z",
+          "updatedAt": "2025-05-06T13:01:59.988Z",
+          "authorId": "UUID_type"
+        },
+        {
+          "postId": "UUID_type",
+          "title": "post_title",
+          "content": "post_content",
+          "createdAt": "2025-05-06T13:02:35.416Z",
+          "updatedAt": "2025-05-06T13:02:35.416Z",
+          "authorId": "UUID_type"
+        },
+    ]
+  }
+}
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
 Get all post
 
 **Endpoint:**<table><tr><td>GET /v1/api/post</td></tr></table>
@@ -447,42 +483,6 @@ Get child comments
               "authorId": "UUID_type"
           }
         }
-    ]
-  }
-}
-```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-Get public post
-
-**Endpoint:**<table><tr><td>GET /v1/api</td></tr></table>
-
-### Response:
-
-```
-{
-    "success": true,
-    "data": {
-      "posts": [
-        {
-          "postId": "UUID_type",
-          "title": "post_title",
-          "content": "post_content",
-          "createdAt": "2025-05-06T13:01:59.988Z",
-          "updatedAt": "2025-05-06T13:01:59.988Z",
-          "authorId": "UUID_type"
-        },
-        {
-          "postId": "UUID_type",
-          "title": "post_title",
-          "content": "post_content",
-          "createdAt": "2025-05-06T13:02:35.416Z",
-          "updatedAt": "2025-05-06T13:02:35.416Z",
-          "authorId": "UUID_type"
-        },
     ]
   }
 }
