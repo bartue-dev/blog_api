@@ -29,6 +29,8 @@
 
 Blog_api is a personal project. It is a common blog api. It can create post, comment and like post of others.
 
+![blog_API_db_diagram](/public/blog_api_db.png)
+
 Key features:
 
 -   Register - client side register an account.
